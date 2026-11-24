@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Group 1 – Agile &amp; Modern Software Process Models</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem('deck-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme='dark'}</script>
+<style>
+:root{--u:min(1vw,1.7778vh);--bg:#050816;--grid:rgba(34,211,238,.07);--panel:#0C1431;--line:#22305E;--text:#E6F0FF;--soft:#9FB0D6;
+--or:#22D3EE;--teal:#A78BFA;--yel:#7DD3FC;--on:#04111F;--chip:#18224A;--glow:rgba(34,211,238,.35);--navbg:rgba(12,20,49,.85);--hover:#1B2A5C;
+--ideal:#A78BFA;--act:#22D3EE;--ok:#4ADE80;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+:root[data-theme=light]{--bg:#F3F6FD;--grid:rgba(8,145,178,.09);--panel:#FFFFFF;--line:#C7D2E8;--text:#0F172A;--soft:#475569;
+--or:#0891B2;--teal:#7C3AED;--yel:#0369A1;--on:#FFFFFF;--chip:#E3EAFB;--glow:rgba(8,145,178,.25);--navbg:rgba(255,255,255,.9);--hover:#E3EAFB;
+--ideal:#7C3AED;--act:#0891B2;color-scheme:light}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:"Space Grotesk",Calibri,"Segoe UI",system-ui,sans-serif;transition:background .4s,color .4s}
+body{background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:40px 40px}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(60% 50% at 85% 0%,var(--glow),transparent 70%),radial-gradient(50% 40% at 0% 100%,rgba(167,139,250,.2),transparent 70%);z-index:0}
+h1,h2,h3{font-family:"Space Grotesk",Georgia,sans-serif;margin:0;letter-spacing:-.01em}
+.deck{height:100%;position:relative;z-index:1}
+.s{position:absolute;inset:0;display:flex;flex-direction:column;padding:clamp(16px,calc(var(--u)*3.2),48px) clamp(20px,calc(var(--u)*5),80px) clamp(72px,calc(var(--u)*7),96px);color:var(--text);overflow:hidden;
+opacity:0;visibility:hidden;transform:translateX(60px) scale(.98);filter:blur(8px);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.8,.2,1),filter .5s ease,visibility 0s .6s}
+.s.before{transform:translateX(-60px) scale(.98)}
+.s.on{opacity:1;visibility:visible;transform:none;filter:none;transition-delay:0s}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes grow{from{transform:scaleY(0)}to{transform:none}}
+@keyframes draw{to{stroke-dashoffset:0}}
+.s.on :is(.card,.step,.note,.big,.fx div,.agenda>div,.tchips div,.team,.loop,.cap,.pill,.brand,.sub,h1,.svgw){animation:rise .6s cubic-bezier(.2,.8,.2,1) both}
+.s.on .stairs div{animation:grow .7s cubic-bezier(.2,.8,.2,1) both;transform-origin:bottom}
+.s.on :is(.card,.step,.agenda>div,.tchips div,.stairs div,.fx div):nth-child(2){animation-delay:.08s}
+.s.on :is(.card,.step,.agenda>div,.tchips div,.stairs div):nth-child(3){animation-delay:.16s}
+.s.on :is(.card,.step,.agenda>div,.tchips div,.stairs div):nth-child(4){animation-delay:.24s}
+.s.on :is(.card,.step):nth-child(5){animation-delay:.32s}.s.on :is(.card,.step):nth-child(6){animation-delay:.4s}.s.on .card:nth-child(7){animation-delay:.48s}
+.s.on .act,.s.on .ideal{stroke-dasharray:900;stroke-dashoffset:900;animation:draw 1.6s .3s ease forwards}
+.s.on .ideal{stroke-dasharray:8 6;stroke-dashoffset:0;animation:none}
+@media (prefers-reduced-motion:reduce){.s,.s.on,.s.on *{animation:none!important;transition:none!important;filter:none}.s.on .act{stroke-dashoffset:0}}
+.s h2{font-size:clamp(26px,calc(var(--u)*3.7),50px);color:var(--text);margin-bottom:clamp(10px,calc(var(--u)*1.6),22px);line-height:1.1}
+.s h2::after{content:"";display:block;height:4px;width:72px;border-radius:4px;margin-top:.3em;background:linear-gradient(90deg,var(--or),var(--teal));box-shadow:0 0 14px var(--glow)}
+.eyebrow{font:700 clamp(12px,calc(var(--u)*1.3),17px) "JetBrains Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--or);margin-bottom:.5em}
+.eyebrow::before{content:"// "}
+.body{flex:1;min-height:0;display:flex;gap:clamp(16px,calc(var(--u)*3),44px);align-items:stretch}
+.body>*{min-width:0}
+.col{flex:1;display:flex;flex-direction:column;gap:clamp(10px,calc(var(--u)*1.6),22px);min-width:0}.col>.card{flex:1}.col>*{min-height:0}
+.card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:clamp(14px,calc(var(--u)*2),28px);flex:1;min-height:0;font-size:clamp(16px,calc(var(--u)*1.75),24px);line-height:1.38;color:var(--text);box-shadow:0 0 28px -12px var(--glow);overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s}
+.card::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--or),var(--teal))}
+.card:hover{transform:translateY(-3px);border-color:var(--or);box-shadow:0 0 34px -6px var(--glow)}
+.card h3{color:var(--yel);font-size:clamp(20px,calc(var(--u)*2.2),30px);margin-bottom:.4em}
+.card p{margin:.3em 0}
+.card.sm{font-size:clamp(16px,calc(var(--u)*1.65),22px)}.card.sm h3{font-size:clamp(18px,calc(var(--u)*2),27px)}
+.note{background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--or);border-radius:14px;padding:clamp(14px,calc(var(--u)*2),28px);min-height:0;font-size:clamp(17px,calc(var(--u)*1.9),25px);color:var(--text);line-height:1.42;box-shadow:0 0 28px -12px var(--glow)}
+.note b{color:var(--yel)}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,calc(var(--u)*1.6),22px);flex:1}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,calc(var(--u)*1.6),22px);flex:1}
+@media (max-width:760px){.grid4{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr}.body{flex-direction:column;overflow:auto}.s{overflow:auto}}
+.num{display:inline-grid;place-items:center;width:1.5em;height:1.5em;border-radius:8px;background:linear-gradient(135deg,var(--or),var(--teal));color:var(--on);font:700 .72em "JetBrains Mono",monospace;margin-right:.5em;vertical-align:middle}
+.chain{display:flex;gap:clamp(18px,calc(var(--u)*2.4),34px);align-items:stretch;counter-reset:n}
+.step{position:relative;flex:1;background:var(--panel);color:var(--text);border:1px solid var(--or);border-radius:12px;padding:clamp(10px,calc(var(--u)*1.4),20px);font-weight:700;font-size:clamp(15px,calc(var(--u)*1.7),22px);display:flex;align-items:center;justify-content:center;text-align:center;min-height:clamp(60px,10vh,110px);box-shadow:0 0 22px -8px var(--glow)}
+.step::before{counter-increment:n;content:counter(n);position:absolute;top:-14px;left:-8px;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--or),var(--teal));color:var(--on);font:700 14px/30px "JetBrains Mono",monospace;text-align:center}
+.step:not(:last-child)::after{content:"›";position:absolute;right:calc(-1 * clamp(16px,calc(var(--u)*2.2),32px));color:var(--or);font-size:clamp(28px,calc(var(--u)*3.6),48px);line-height:1;width:clamp(14px,calc(var(--u)*2),30px);text-align:center}
+.step span{display:block}.step small{display:block;font-weight:400;font-size:.76em;color:var(--soft);margin-top:.35em}
+.loop{color:var(--or);font:700 clamp(15px,calc(var(--u)*1.7),23px) "JetBrains Mono",monospace;text-align:center;border:2px dashed var(--or);border-radius:12px;padding:.5em;margin:clamp(10px,calc(var(--u)*1.4),20px) 0}
+.stairs{display:flex;align-items:flex-end;gap:clamp(8px,calc(var(--u)*1.4),20px);flex:1;min-height:0}
+.stairs div{flex:1;border-radius:12px 12px 0 0;padding:clamp(10px,calc(var(--u)*1.4),20px);font-size:clamp(16px,calc(var(--u)*2),25px);font-weight:600;box-shadow:0 0 24px -6px var(--glow)}
+.stairs b{display:block;font-size:clamp(21px,calc(var(--u)*2.7),35px)}
+.cap{text-align:center;font:700 clamp(14px,calc(var(--u)*1.7),22px) "JetBrains Mono",monospace;color:var(--teal);margin-top:clamp(8px,calc(var(--u)*1.2),16px)}
+.svgw{flex:1;min-height:0;display:flex;justify-content:center}.svgw svg{width:100%;max-height:100%}
+svg text{fill:currentColor}
+.ideal{fill:none;stroke:var(--ideal);stroke-width:3;stroke-dasharray:8 6}.act{fill:none;stroke:var(--act);stroke-width:4}
+.dot{fill:var(--act)}.axis{stroke:currentColor;opacity:.25}
+table{border-collapse:separate;border-spacing:4px;width:100%;font-size:clamp(15px,calc(var(--u)*1.9),25px)}
+th{background:linear-gradient(90deg,var(--or),var(--teal));color:var(--on);text-align:left;padding:.5em .8em;border-radius:8px;font-family:"JetBrains Mono",monospace;font-size:.85em}
+td{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:.55em .8em;color:var(--text)}
+td:first-child{font-weight:700;color:var(--yel)}
+.pill{align-self:flex-start;background:var(--chip);color:var(--or);border:1px solid var(--or);font:700 clamp(13px,calc(var(--u)*1.6),20px) "JetBrains Mono",monospace;border-radius:999px;padding:.35em 1.2em;box-shadow:0 0 18px -4px var(--glow)}
+.title-wrap{flex:1;display:flex;gap:clamp(16px,calc(var(--u)*4),64px);min-height:0}
+.title-main{flex:1;display:flex;flex-direction:column;justify-content:center;gap:clamp(8px,calc(var(--u)*1.1),16px)}
+.title-main h1{font-size:clamp(34px,calc(var(--u)*5.2),72px);line-height:1.05;background:linear-gradient(90deg,var(--text) 30%,var(--or),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--or);font:700 clamp(14px,calc(var(--u)*1.8),24px) "JetBrains Mono",monospace}
+.team{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:clamp(16px,calc(var(--u)*2.4),34px);min-width:min(30%,300px);align-self:center;box-shadow:0 0 34px -10px var(--glow)}
+.team h3{font-size:clamp(24px,calc(var(--u)*3),40px);margin-bottom:.5em;color:var(--yel)}
+.team ol{margin:0;padding-left:1.3em;font-size:clamp(17px,calc(var(--u)*2),25px);line-height:1.6}
+@media (max-width:760px){.title-wrap{flex-direction:column;overflow:auto}.team{align-self:stretch}}
+.tchips{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,calc(var(--u)*1),12px)}
+.tchips div{display:flex;align-items:center;gap:.6em;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:.5em .8em;color:var(--text);font-size:clamp(14px,calc(var(--u)*1.7),22px)}
+.tchips b{flex:none;width:1.7em;height:1.7em;border-radius:8px;background:linear-gradient(135deg,var(--or),var(--teal));color:var(--on);display:grid;place-items:center;font:700 .85em "JetBrains Mono",monospace}
+.brand{display:flex;align-items:center;gap:clamp(10px,calc(var(--u)*1.6),20px)}
+.brand img{width:clamp(48px,calc(var(--u)*6),90px);height:auto;flex:none;background:#fff;border-radius:12px;padding:6px}
+.brand span{font-weight:700;color:var(--text);font-size:clamp(17px,calc(var(--u)*2.3),31px);line-height:1.15}
+.agenda{display:flex;flex-direction:column;gap:clamp(8px,calc(var(--u)*1.2),16px);flex:1;justify-content:center}
+.agenda div{display:flex;align-items:center;gap:1em;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:clamp(10px,calc(var(--u)*1.3),18px) clamp(12px,calc(var(--u)*1.8),24px);font-size:clamp(18px,calc(var(--u)*2.2),28px);color:var(--text);transition:transform .25s,border-color .25s}
+.agenda div:hover{transform:translateX(6px);border-color:var(--or)}
+.agenda span{flex:none;width:2em;height:2em;border-radius:10px;background:linear-gradient(135deg,var(--or),var(--teal));color:var(--on);display:grid;place-items:center;font:700 1em "JetBrains Mono",monospace}
+.agenda p{margin:0;flex:1}.agenda small{display:block;font-size:.65em;color:var(--soft);margin-top:.15em}
+.big{background:var(--panel);border:2px solid var(--or);color:var(--text);flex:.8;border-radius:14px;padding:clamp(18px,calc(var(--u)*2.6),38px);display:flex;flex-direction:column;justify-content:center;gap:.8em;box-shadow:0 0 34px -8px var(--glow)}
+.big h3{font-size:clamp(26px,calc(var(--u)*3.4),44px);color:var(--yel)}.big p{margin:0;color:var(--text);font-size:clamp(17px,calc(var(--u)*2.1),27px)}
+.flow{display:flex;flex-wrap:wrap;gap:.35em;align-items:center;margin-top:.6em;font:700 .68em "JetBrains Mono",monospace}
+.flow span{background:var(--chip);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:.25em .6em}.flow i{color:var(--or);font-style:normal;font-size:1.3em}
+.tags{display:flex;flex-wrap:wrap;gap:.5em;margin:.4em 0 .8em}.tags span{background:var(--chip);color:var(--yel);border:1px solid var(--or);border-radius:999px;padding:.15em .8em;font:700 .8em "JetBrains Mono",monospace}
+.fx{display:flex;gap:clamp(10px,calc(var(--u)*1.6),20px)}.fx div{flex:1;text-align:center;border-radius:12px;padding:.7em;background:var(--or);color:var(--on);font-weight:700;font-size:clamp(15px,calc(var(--u)*1.8),23px)}
+.fx div+div{background:var(--teal)}.fx small{display:block;font:700 .65em "JetBrains Mono",monospace;letter-spacing:.14em}.fx b{font-size:1.5em}
+/* controls */
+.nav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 14px);display:flex;align-items:center;gap:6px;padding:6px;z-index:5;max-width:calc(100% - 24px);background:var(--navbg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:999px;box-shadow:0 0 30px -8px var(--glow)}
+.nav button{font:600 15px "Space Grotesk",sans-serif;background:transparent;color:var(--text);border:0;border-radius:999px;height:38px;min-width:38px;padding:0 14px;cursor:pointer;transition:background .2s}
+.nav button:hover{background:var(--hover)}
+.nav button.on{background:linear-gradient(90deg,var(--or),var(--teal));color:var(--on)}
+.nav button:focus-visible{outline:3px solid var(--or);outline-offset:2px}
+.nav .ic{font-size:20px;padding:0}
+.nav .sep{width:1px;height:22px;background:var(--line);margin:0 4px}
+.nav #count{color:var(--text);font:500 13px "JetBrains Mono",monospace;min-width:58px;text-align:center}
+.chips{display:contents}
+@media (max-width:760px){.chips,.nav .sep{display:none}}
+#bar{position:fixed;top:0;left:0;height:5px;width:0;background:linear-gradient(90deg,var(--or),var(--teal));box-shadow:0 0 12px var(--or);z-index:6;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+#ov{position:fixed;inset:0;z-index:9;background:var(--bg);display:none;overflow:auto;padding:clamp(16px,calc(var(--u)*4),56px)}
+#ov.on{display:block}
+#ov h4{margin:0 0 18px;color:var(--text);font:700 clamp(20px,calc(var(--u)*2.4),30px) "Space Grotesk",sans-serif}
+#ov .g{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+#ov button{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;min-height:96px;cursor:pointer;font-size:17px;line-height:1.25}
+#ov button:hover,#ov button:focus-visible{background:var(--hover);outline:none;border-color:var(--or)}
+#ov button.cur{border-color:var(--or);box-shadow:0 0 18px -4px var(--glow)}
+#ov button i{display:block;font:700 13px "JetBrains Mono",monospace;color:var(--or);font-style:normal;margin-bottom:6px}
+#laser{position:fixed;left:0;top:0;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;background:#EF4444;border:3px solid #fff;z-index:20;pointer-events:none;display:none;box-shadow:0 0 16px #EF4444}
+body.laser,body.laser *{cursor:none!important}
+body.laser #laser{display:block}
+.deck{height:100dvh}
+@media (max-width:760px){
+.s{padding:18px 16px 92px;overflow-x:hidden;overflow-y:auto;filter:none!important;-webkit-overflow-scrolling:touch}
+.s>*{flex-shrink:0}
+.s h2{font-size:28px}
+.body,.title-wrap,.agenda,.grid3,.grid4{flex:none!important}
+.body{flex-direction:column;overflow:visible;gap:14px}
+.col,.card,.note,.big{flex:none!important;min-height:auto}
+.card{overflow:visible;font-size:17px}.card h3,.card.sm h3{font-size:20px}
+.note{font-size:17px!important}
+.grid3,.grid4{grid-template-columns:1fr}
+.chain{flex-direction:column;gap:28px;margin-top:20px!important}
+.step{flex:none;min-height:64px}
+.step:not(:last-child)::after{content:"▾";right:auto;top:auto;left:50%;bottom:-28px;transform:translateX(-50%);width:auto}
+.loop{margin:28px 0 14px}
+.stairs{flex:none;height:260px}
+.svgw{flex:none}.svgw svg{height:auto}
+.title-main h1{font-size:34px}
+.team{min-width:0;align-self:stretch}
+.tchips{grid-template-columns:1fr}
+.fx{margin-top:12px}
+table{min-width:520px;font-size:14px}
+div[style*="overflow:auto"]{flex:none!important}
+.agenda div{font-size:18px}
+.nav{gap:2px}#fs{display:none}
+}
+</style><noscript><style>html,body{height:auto}.deck{height:auto}.s{position:relative;opacity:1;visibility:visible;transform:none;filter:none;min-height:100vh;overflow:visible}.nav,#bar{display:none}</style></noscript></head><body>
+<main class="deck" id="deck">
+<section class="s dark"><div class="title-wrap"><div class="title-main"><div class="brand"><img src="logo.png" alt="American College of Technology logo" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x1=%270%27 y1=%270%27 x2=%271%27 y2=%271%27%3E%3Cstop offset=%270%27 stop-color=%27%2322D3EE%27/%3E%3Cstop offset=%271%27 stop-color=%27%237C3AED%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%27100%27 height=%27100%27 rx=%2720%27 fill=%27url(%23g)%27/%3E%3Ctext x=%2750%27 y=%2765%27 font-family=%27Arial,sans-serif%27 font-size=%2740%27 font-weight=%27700%27 text-anchor=%27middle%27 fill=%27white%27%3EACT%3C/text%3E%3C/svg%3E'"><span>American College of Technology</span></div><span class="pill">Sec A · Assignment I</span>
+<h1>Agile &amp; Modern Software Process Models</h1><div class="sub">Time boxing · Crystal · Prototype model · AI-native &amp; agentic SDLC</div><div class="tchips"><div><b>1</b>Time boxing</div><div><b>2</b>Crystal</div><div><b>3</b>Prototype model &amp; its types</div><div><b>4</b>AI-native &amp; agentic SDLC</div></div></div>
+<aside class="team"><h3>Group 1</h3><ol><li>Abenezer Abrham</li><li>Fikir Mulualem</li><li>Firaol</li><li>Solomon</li><li>Tsion Ashenafi</li><li>Yeabsira</li><li>Leul Girma</li><li>Abel Hailu</li><li>Kebron</li></ol></aside></div></section>
+<section class="s"><h2>What we will cover</h2><div class="agenda"><div><span>1</span><p>Time boxing<small>A fixed period to finish a chosen piece of work</small></p></div><div><span>2</span><p>Crystal<small>A people-first family of agile methods</small></p></div><div><span>3</span><p>Prototype process model and its types<small>Build, show, learn, refine</small></p></div><div><span>4</span><p>AI-native and agentic SDLC<small>How AI agents reshape the software lifecycle</small></p></div></div></section>
+<section class="s"><h2>Time boxing explained</h2><div class="body" style="flex:1.1"><div class="col" style="flex:1"><div class="note" style="flex:1">A time box is a fixed, non-negotiable period in which a team commits to finishing a chosen piece of work. <b>When time runs out, the box closes.</b> Unfinished work is re-prioritized, not extended.</div><div class="fx"><div><small>FIXED</small><b>Time</b></div><div><small>FLEXIBLE</small><b>Scope</b></div></div></div></div><div class="chain" style="margin-top:clamp(14px,2.4vw,30px)"><div class="step"><span>Set the goal<small>What must this box deliver?</small></span></div><div class="step"><span>Fix the duration<small>1 to 4 weeks, never extended</small></span></div><div class="step"><span>Prioritize scope<small>MoSCoW: Must, Should, Could, Won’t</small></span></div><div class="step"><span>Work and track daily<small>Stand-ups, task board, burndown</small></span></div><div class="step"><span>Review and reflect<small>Demo the result, hold a retrospective</small></span></div></div></section>
+<section class="s"><h2>Time boxing in action</h2><div class="body"><div class="col" style="flex:1.5"><div class="card" style="display:flex;flex-direction:column;min-height:0"><div class="svgw"><svg viewBox="0 0 640 350" role="img" aria-label="Burndown chart: actual work remaining versus ideal over 10 days, both reaching zero on day 10" font-family="'JetBrains Mono',Calibri,sans-serif" font-weight="700"><line class="axis" x1="50" x2="620" y1="290" y2="290"/><text x="40" y="295" font-size="14" text-anchor="end">0</text><line class="axis" x1="50" x2="620" y1="222" y2="222"/><text x="40" y="228" font-size="14" text-anchor="end">10</text><line class="axis" x1="50" x2="620" y1="155" y2="155"/><text x="40" y="160" font-size="14" text-anchor="end">20</text><line class="axis" x1="50" x2="620" y1="88" y2="88"/><text x="40" y="92" font-size="14" text-anchor="end">30</text><line class="axis" x1="50" x2="620" y1="20" y2="20"/><text x="40" y="25" font-size="14" text-anchor="end">40</text><text x="50" y="312" font-size="14" text-anchor="middle">0</text><text x="107" y="312" font-size="14" text-anchor="middle">1</text><text x="164" y="312" font-size="14" text-anchor="middle">2</text><text x="221" y="312" font-size="14" text-anchor="middle">3</text><text x="278" y="312" font-size="14" text-anchor="middle">4</text><text x="335" y="312" font-size="14" text-anchor="middle">5</text><text x="392" y="312" font-size="14" text-anchor="middle">6</text><text x="449" y="312" font-size="14" text-anchor="middle">7</text><text x="506" y="312" font-size="14" text-anchor="middle">8</text><text x="563" y="312" font-size="14" text-anchor="middle">9</text><text x="620" y="312" font-size="14" text-anchor="middle">10</text><text x="335" y="338" font-size="14" text-anchor="middle">Day of the time box</text><polyline class="ideal" points="50,20 107,47 164,74 221,101 278,128 335,155 392,182 449,209 506,236 563,263 620,290"/><polyline class="act" points="50,20 107,34 164,60 221,67 278,108 335,128 392,142 449,189 506,222 563,256 620,290"/><g class="dot"><circle cx="50" cy="20" r="4.5"/><circle cx="107" cy="34" r="4.5"/><circle cx="164" cy="60" r="4.5"/><circle cx="221" cy="67" r="4.5"/><circle cx="278" cy="108" r="4.5"/><circle cx="335" cy="128" r="4.5"/><circle cx="392" cy="142" r="4.5"/><circle cx="449" cy="189" r="4.5"/><circle cx="506" cy="222" r="4.5"/><circle cx="563" cy="256" r="4.5"/><circle cx="620" cy="290" r="4.5"/></g><line x1="620" x2="620" y1="20" y2="290" style="stroke:var(--ok)" stroke-width="3"/><text x="612" y="38" font-size="15" text-anchor="end">Box closes</text><g font-size="15" transform="translate(215,0)"><line class="ideal" x1="70" x2="100" y1="30" y2="30" style="stroke-dasharray:6 4"/><text x="108" y="35">Ideal</text><line class="act" x1="170" x2="200" y1="30" y2="30" style="stroke-dasharray:none;stroke-dashoffset:0;animation:none"/><text x="208" y="35">Actual</text></g></svg></div></div><div class="cap" style="margin:0">Above the dashed line means behind plan. On day 10 the box closes either way.</div></div><div class="col"><div class="card sm"><h3>Benefits</h3><p>• Focus and urgency</p><p>• Predictable delivery dates</p><p>• Early, frequent feedback</p></div><div class="card sm"><h3>Pitfalls</h3><p>• Rushed work from bad estimates</p><p>• Quality or testing gets cut</p><p>• Constant pressure, burnout</p></div></div></div></section>
+<section class="s"><h2>Crystal: a family of methods</h2><div class="body"><div class="col" style="flex:.9"><div class="note">Created by Alistair Cockburn in the 1990s. Crystal is <b>people-centered</b>: it tunes how heavy the process is to the team and the project, and favors communication over documentation.</div><div class="card sm"><h3>Two dials</h3><p><b>Team size:</b> more people, darker color</p><p><b>Criticality:</b> what is at risk if it fails, from comfort to money to life</p></div></div><div class="col" style="flex:1.2"><div class="stairs"><div style="height:42%;background:#7DD3FC;color:#0B1020"><b>Clear</b>up to ~6 people</div><div style="height:60%;background:#FACC15;color:#0B1020"><b>Yellow</b>up to ~20 people</div><div style="height:78%;background:#FB923C;color:#0B1020"><b>Orange</b>up to ~40 people</div><div style="height:96%;background:#DC2626;color:#fff"><b>Red</b>up to ~80 people</div></div><div class="cap" style="margin:0">Team size grows, process gets heavier</div></div></div></section>
+<section class="s"><h2>Seven properties of success</h2><div class="grid4"><div class="card sm"><h3><span class="num">1</span>Frequent delivery</h3>Ship working software often</div><div class="card sm"><h3><span class="num">2</span>Reflective improvement</h3>Pause to review and adjust</div><div class="card sm"><h3><span class="num">3</span>Osmotic communication</h3>Info flows by working side by side</div><div class="card sm"><h3><span class="num">4</span>Personal safety</h3>Speak up without fear of blame</div><div class="card sm"><h3><span class="num">5</span>Focus</h3>Clear priorities, time to work</div><div class="card sm"><h3><span class="num">6</span>Easy access to expert users</h3>Quick feedback from real users</div><div class="card sm"><h3><span class="num">7</span>Technical environment</h3>Automated tests and integration</div><div class="big" style="flex:none"><h3 style="font-size:clamp(20px,2.4vw,32px)">Crystal Clear</h3><p style="font-size:clamp(14px,1.6vw,21px)">requires the first three (orange). The rest are strongly recommended.</p></div></div></section>
+<section class="s"><h2>The prototype process model</h2><div class="chain"><div class="step"><span>Gather requirements<small>basic, rough needs only</small></span></div><div class="step"><span>Quick design<small>focus on what users will see</small></span></div><div class="step"><span>Build prototype<small>a small working version</small></span></div><div class="step"><span>User evaluation<small>users try it and give feedback</small></span></div><div class="step"><span>Refine<small>fix the design, loop back to step 3</small></span></div><div class="step"><span>Build final system<small>engineer it properly</small></span></div></div><div class="loop">↺ Refine and repeat from step 3 until users are happy</div><div class="body"><div class="card sm"><h3>Best when</h3><p>• Requirements are unclear</p><p>• The user interface is central</p><p>• Users can’t say what they want</p></div><div class="card sm"><h3>Watch out</h3><p>• Users mistake it for the product</p><p>• Endless feedback, scope creep</p><p>• Quick-and-dirty code carried over</p></div></div></section>
+<section class="s"><h2>Types of prototyping</h2><div class="grid4"><div class="card"><h3><span class="num">1</span>Throwaway (rapid)</h3>Built fast to clarify requirements, then thrown away. The real build starts fresh.<div class="flow"><span>Prototype</span><i>›</i><span>Learn</span><i>›</i><span>Discard</span></div></div><div class="card"><h3><span class="num">2</span>Evolutionary</h3>One prototype is refined again and again until it becomes the final system.<div class="flow"><span>Version 1</span><i>›</i><span>Version 2</span><i>›</i><span>Final system</span></div></div><div class="card"><h3><span class="num">3</span>Incremental</h3>The system is split into parts. Each is prototyped separately, then merged.<div class="flow"><span>Part A</span><i>›</i><span>Part B</span><i>›</i><span>Merge</span></div></div><div class="card"><h3><span class="num">4</span>Extreme</h3>Used mainly for web applications and built in three phases.<div class="flow"><span>Static pages</span><i>›</i><span>Services</span><i>›</i><span>Real backend</span></div></div></div></section>
+<section class="s"><h2>From AI-assisted to agentic</h2><div style="overflow:auto;flex:1"><table><tr><th>Level</th><th>AI does</th><th>Human does</th><th>Example</th></tr><tr><td>AI-assisted</td><td>Suggests code and answers questions</td><td>Drives every step</td><td>Autocomplete, chat helper</td></tr><tr><td>AI-native</td><td>Built into every phase, plan to ops</td><td>Guides and reviews the output</td><td>AI-drafted specs, tests, reviews</td></tr><tr><td>Agentic</td><td>Plans, acts and verifies multi-step tasks</td><td>Sets goals and approves results</td><td>Agent opens a PR, fixes failing tests</td></tr></table></div><div class="cap">More autonomy means more need for human oversight</div></section>
+<section class="s"><h2>The agentic SDLC, phase by phase</h2><div class="grid3"><div class="card sm"><h3><span class="num">1</span>Plan</h3><p><b>Agent:</b> drafts user stories</p><p><b>Human:</b> approves requirements</p></div><div class="card sm"><h3><span class="num">2</span>Design</h3><p><b>Agent:</b> proposes architecture options</p><p><b>Human:</b> picks the design</p></div><div class="card sm"><h3><span class="num">3</span>Build</h3><p><b>Agent:</b> writes code, opens PRs</p><p><b>Human:</b> reviews and merges</p></div><div class="card sm"><h3><span class="num">4</span>Test</h3><p><b>Agent:</b> generates and runs tests</p><p><b>Human:</b> checks edge cases</p></div><div class="card sm"><h3><span class="num">5</span>Deploy</h3><p><b>Agent:</b> runs CI/CD, flags risks</p><p><b>Human:</b> approves the release</p></div><div class="card sm"><h3><span class="num">6</span>Operate</h3><p><b>Agent:</b> monitors logs, suggests fixes</p><p><b>Human:</b> decides on changes</p></div></div><div class="cap">Agents act. Humans decide.</div></section>
+<section class="s"><h2>Benefits and risks</h2><div class="body"><div class="card sm"><h3>Benefits</h3><p>• Faster delivery of routine work</p><p>• Continuous checks catch errors early</p><p>• Engineers focus on design and decisions</p><p>• Quicker feedback across the lifecycle</p></div><div class="card sm"><h3>Risks</h3><p>• Hallucinated or insecure code</p><p>• Over-reliance and skill loss</p><p>• Unclear accountability</p><p>• Data privacy and IP exposure</p></div></div><div class="note" style="margin-top:clamp(12px,2vw,24px);font-size:clamp(15px,1.8vw,23px)"><b>How teams stay in control</b><div class="tags"><span>Human code review</span><span>Automated tests</span><span>Least-privilege access</span><span>Audit logs</span></div><b>Tools you may know</b><div class="tags" style="margin-bottom:0"><span>GitHub Copilot</span><span>Claude Code</span><span>Cursor</span></div></div></section>
+<section class="s"><h2>The four topics at a glance</h2><div style="overflow:auto;flex:1"><table><tr><th>Topic</th><th>Core idea</th><th>Fits best when</th></tr><tr><td>Time boxing</td><td>Fixed time, flexible scope. Unfinished work moves to the next box.</td><td>Deadlines matter and scope can flex</td></tr><tr><td>Crystal</td><td>People-first agile family, scaled by team size and criticality.</td><td>Small teams need low-ceremony process</td></tr><tr><td>Prototype model</td><td>Build, show, learn, refine a working preview.</td><td>Requirements are unclear or the UI is central</td></tr><tr><td>AI-native and agentic SDLC</td><td>AI in every phase. Agents act, humans approve.</td><td>Routine work is large and review is strong</td></tr></table></div></section>
+<section class="s"><h2>Key takeaways</h2><div class="agenda"><div><span>1</span><p><b>Time boxing</b><small style="font-size:.8em">Fix the time, flex the scope</small></p></div><div><span>2</span><p><b>Crystal</b><small style="font-size:.8em">Scale the method to the team and the risk</small></p></div><div><span>3</span><p><b>Prototype model</b><small style="font-size:.8em">Build, show, learn, refine</small></p></div><div><span>4</span><p><b>AI-native SDLC</b><small style="font-size:.8em">Agents act, humans decide</small></p></div></div></section>
+<section class="s dark" style="justify-content:center"><h1 style="font-size:clamp(44px,8vw,110px);background:linear-gradient(90deg,var(--or),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent">Questions?</h1><div class="sub" style="font-size:clamp(18px,2.6vw,34px);margin-top:.5em">Thank you · Group 1, Sec A</div></section>
+</main>
+
+<div id="bar"></div>
+<div id="ov" role="dialog" aria-label="Slide overview"></div><div id="laser"></div>
+
+<nav class="nav" aria-label="Slides"><button class="ic" id="prev" aria-label="Previous slide">‹</button><span class="chips" id="chips"></span><span class="sep"></span><span id="count" aria-live="polite"></span><button class="ic" id="next" aria-label="Next slide">›</button><button class="ic" id="theme" aria-label="Toggle light or dark mode" title="Light / dark (T)">☾</button><button class="ic" id="fs" aria-label="Toggle fullscreen" title="Fullscreen (F)">⛶</button></nav>
+<script>
+(function(){
+var S=[].slice.call(document.querySelectorAll('.s')),i=0,cnt=document.getElementById('count'),bar=document.getElementById('bar'),box=document.getElementById('chips'),
+names=['Intro','Time boxing','Crystal','Prototype','AI SDLC','Wrap-up'],starts=[0,2,4,6,8,11],chips=[],R=document.documentElement,tb=document.getElementById('theme');
+function sec(k){var r=0;starts.forEach(function(s,j){if(k>=s)r=j});return r}
+names.forEach(function(n,j){var b=document.createElement('button');b.textContent=n;b.onclick=function(){show(starts[j])};box.appendChild(b);chips.push(b)});
+S.forEach(function(s,k){var h=s.querySelector('h2');if(h&&k>1){var e=document.createElement('div');e.className='eyebrow';e.textContent=names[sec(k)];s.insertBefore(e,h)}});
+function show(n,noHash){i=Math.max(0,Math.min(S.length-1,n));S.forEach(function(s,k){s.classList.toggle('on',k===i);s.classList.toggle('before',k<i)});cnt.textContent=(i+1)+' / '+S.length;bar.style.width=((i+1)/S.length*100)+'%';chips.forEach(function(b,j){b.classList.toggle('on',j===sec(i))});
+ if(!noHash){try{history.replaceState(null,'','#s'+(i+1))}catch(e){}}}
+function fromHash(){var m=/^#s(\d+)$/.exec(location.hash);show(m?+m[1]-1:0,true)}
+function paint(){tb.textContent=R.dataset.theme==='light'?'☀':'☾'}
+function theme(){var t=R.dataset.theme==='light'?'dark':'light';R.dataset.theme=t;try{localStorage.setItem('deck-theme',t)}catch(e){}paint()}
+tb.onclick=theme;paint();
+document.getElementById('prev').onclick=function(){show(i-1)};
+document.getElementById('next').onclick=function(){show(i+1)};
+function fs(){try{if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen()}catch(x){}}
+document.getElementById('fs').onclick=fs;
+var x0=null,y0=0;document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+document.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0,v=e.changedTouches[0].clientY-y0;if(Math.abs(d)>60&&Math.abs(d)>Math.abs(v)*1.5)show(i+(d<0?1:-1));x0=null});
+window.addEventListener('hashchange',fromHash);
+
+/* overview (G), laser pointer (L), theme (T) */
+var ov=document.getElementById('ov'),B=document.body,L=document.getElementById('laser');
+function build(){var h='<h4>All slides - click to jump</h4><div class="g">';
+ S.forEach(function(s,k){var e=s.querySelector('h2')||s.querySelector('h1'),n=e?e.textContent.trim():'Slide';h+='<button data-k="'+k+'"'+(k===i?' class="cur"':'')+'><i>'+String(k+1).padStart(2,'0')+'</i>'+n.replace(/</g,'&lt;')+'</button>'});
+ ov.innerHTML=h+'</div>'}
+function tgo(open){var o=open===undefined?!ov.classList.contains('on'):open;if(o)build();ov.classList.toggle('on',o);if(o){var b=ov.querySelector('.cur');b&&b.focus()}}
+ov.addEventListener('click',function(e){var b=e.target.closest('button');if(b)show(+b.dataset.k);tgo(false)});
+document.addEventListener('mousemove',function(e){L.style.transform='translate('+e.clientX+'px,'+e.clientY+'px)'});
+
+document.addEventListener('keydown',function(e){
+ if(e.ctrlKey||e.metaKey||e.altKey)return;var k=e.key;
+ if(ov.classList.contains('on')){
+  var nav=['ArrowRight','ArrowLeft','ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' ','Enter'];
+  if(k==='Escape'||k==='g'||k==='G'){tgo(false);return}
+  if(nav.indexOf(k)<0)return;
+  e.preventDefault();
+  var b=[].slice.call(ov.querySelectorAll('button')),j=b.indexOf(document.activeElement);
+  if(j<0)j=Math.max(0,b.findIndex(function(x){return x.classList.contains('cur')}));
+  if(k===' '||k==='Enter'){b[j].click();return}
+  var cols=b.filter(function(x){return x.offsetTop===b[0].offsetTop}).length||1,n=j;
+  if(k==='ArrowRight'||k==='PageDown')n=j+1;else if(k==='ArrowLeft'||k==='PageUp')n=j-1;
+  else if(k==='ArrowDown')n=j+cols;else if(k==='ArrowUp')n=j-cols;else if(k==='Home')n=0;else if(k==='End')n=b.length-1;
+  n=Math.max(0,Math.min(b.length-1,n));b[n].focus();b[n].scrollIntoView({block:'nearest'});
+  return}
+ if(k==='ArrowRight'||k==='PageDown'||k===' '){e.preventDefault();show(i+1)}
+ else if(k==='ArrowLeft'||k==='PageUp'){show(i-1)}
+ else if(k==='Home'){show(0)}else if(k==='End'){show(S.length-1)}
+ else if(k==='f'||k==='F'){fs()}
+ else if(k==='g'||k==='G'){tgo()}
+ else if(k==='t'||k==='T'){theme()}
+ else if(k==='l'||k==='L'){B.classList.toggle('laser')}
+});
+fromHash();
+})();
+</script>
+</body></html>
